@@ -1,0 +1,52 @@
+📌 Offset Concept in RabbitMQ Stream
+🔹 What is Offset?
+Offset is a unique number for each message in a Stream that specifies the order of messages.
+🔹 When a Consumer (message consumer) reads messages in a RabbitMQ Stream,
+RabbitMQ uses Offset to understand how far this Consumer has processed the messages.
+
+If a Consumer reads the messages from the beginning:
+✅ It will first receive message 0, then 1, then 2, and so on.
+But if a new Consumer joins the Stream after 5 messages have been sent:
+✅ It can choose to read only message 5 onwards.
+
+Types of Offset in RabbitMQ Stream
+🔹 In RabbitMQ Stream, you can specify from which point a Consumer should start reading messages.
+
+✅ 1. Read from the first message (all previous and new messages)
+        - OffsetSpecification.first()
+
+✍🏼 Explanation:
+Reads all previous messages + new messages.
+Even if the Consumer is turned off and on again, it will start reading again from the first message.
+
+✅ 2. Read from new messages (previous messages are not read)
+        - OffsetSpecification.next()
+
+✍🏼 Explanation:
+Only new messages sent after the Consumer is turned on are read.
+Older messages in the Stream are ignored.
+
+✅ 3. Reading from the last section of messages
+        - OffsetSpecification.last()
+
+✍🏼 Explanation:
+Starts reading from the most recent saved messages.
+For example, if there are 100 messages in the Stream, they may only be read from message 90 onwards.
+
+✅ 4. Reading based on a specific time
+        - OffsetSpecification.timestamp(Instant.now().minusSeconds(300))
+
+✍🏼 Explanation:
+You can specify that messages from a specific time onwards are read.
+For example, all messages sent in the last 5 minutes.
+
+📌 Storing Offset in RabbitMQ
+🔹 RabbitMQ automatically stores the Offset of each Consumer.
+🔹 If the application is shut down and restarted, it will continue from the last message read.
+
+✅ Unique naming for each Consumer must have a unique name so that RabbitMQ can track the Offset read.
+
+🚨 Important note:
+If two Consumers share the same name, they may randomly share messages between each other.
+
+

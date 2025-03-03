@@ -1,0 +1,8 @@
+spring:
+  application.name: rabbitmq.producer.stream
+  rabbitmq:
+    addresses: localhost:5672
+    username: admin
+    password: admin123
+
+

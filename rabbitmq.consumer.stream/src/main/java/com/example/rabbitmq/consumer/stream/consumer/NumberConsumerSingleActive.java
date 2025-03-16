@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-@Service
+//@Service
 public class NumberConsumerSingleActive {
 
     private static final Logger logger = LoggerFactory.getLogger(NumberConsumerSingleActive.class);
 
-    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "singleActiveContainerFactory")
+    //@RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "singleActiveContainerFactory")
     public void singleActiveOne(Message message, MessageHandler.Context context) throws InterruptedException {
         Data data = (Data) message.getBody();
         String log = String.format("Single Active 1: %s, on offset: %s", data.getValue(), context.offset());

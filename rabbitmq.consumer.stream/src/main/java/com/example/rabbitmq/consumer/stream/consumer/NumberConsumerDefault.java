@@ -7,17 +7,17 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class NumberConsumerDefault {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //@RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME)
+    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME)
     public void listenNumberOne(String message){
         logger.info("NumberConsumerDefault listenNumberOne: {}", message);
     }
 
-    //@RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME)
+    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME)
     public void listenNumberTwo(Message message){
         logger.info("NumberConsumerDefault listenNumberTwo: {}", message);
     }

@@ -18,7 +18,7 @@ public class NumberConsumerTimestamp {
 //        logger.info("Timestamp One: {}, on offset {}", message, context.offset());
 //    }
 
-    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "timestampContainerFactoryTwo")
+    //@RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "timestampContainerFactoryTwo")
     public void absoluteTwo(Message message, MessageHandler.Context context) {
         logger.info("Timestamp 2: {}, on offset {}", message, context.offset());
     }

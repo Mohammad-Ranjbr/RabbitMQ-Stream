@@ -90,3 +90,9 @@ While the number of messages in the stream increases, these messages will not af
 
 ✅ These tracking messages are not processed by the Consumer, but are seen in the Stream message count.
 ✅ For this reason, the Offset value should not be used as a measure of the actual number of messages in the Stream.
+
+When using the manual offset tracking strategy, the consumer must manually manage the offset state (i.e., from which message to start consuming).
+Automatic Offset Tracking: In this case, the system automatically stores the offset of the last message consumed, and the consumer continues from that point after restarting.
+Manual Offset Tracking: In this case, the consumer must store and track the offset itself, meaning that the system never automatically knows where the last message was.
+It is recommended to store offsets regularly (e.g., every few thousand messages) to prevent unnecessary stream growth.
+

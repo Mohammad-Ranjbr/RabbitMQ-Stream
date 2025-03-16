@@ -18,7 +18,7 @@ public class NumberConsumerNext {
 //        logger.info("Next One: {}, on offset {}", message, context.offset());
 //    }
 
-    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "nextContainerFactoryOne")
+    //@RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "nextContainerFactoryOne")
     public void absoluteTwo(Message message, MessageHandler.Context context) {
         logger.info("Next 2: {}, on offset {}", message, context.offset());
     }

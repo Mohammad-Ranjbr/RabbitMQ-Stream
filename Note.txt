@@ -96,3 +96,30 @@ Automatic Offset Tracking: In this case, the system automatically stores the off
 Manual Offset Tracking: In this case, the consumer must store and track the offset itself, meaning that the system never automatically knows where the last message was.
 It is recommended to store offsets regularly (e.g., every few thousand messages) to prevent unnecessary stream growth.
 
+🔹 Difference between Queue and Stream
+Queue: In a queue, each message is received and processed by only one consumer. This means that consumers process different messages in parallel and independently.
+Stream: In a stream, each message may be processed by multiple consumers. This means that a message may be processed multiple times.
+
+🔹 What is Single Active Consumer?
+✅ Single Active Consumer is a feature that allows only one active consumer to process messages, even if multiple consumers are connected.
+⏳ If this active consumer crashes or fails, RabbitMQ automatically replaces another consumer as the active consumer.
+
+🔸 Challenges in Single Active Consumer
+🔹 When a consumer stops and another consumer starts, there is a possibility that some messages that have already been processed will be reprocessed.
+🔹 This happens because the offset is not stored per message. RabbitMQ only stores the offset at certain intervals (e.g. every few thousand messages). So if a consumer stops after processing several messages, some of those messages may be processed again by the next consumer.
+
+🔹 What is an Idempotent Consumer?
+✅ To prevent reprocessing of messages, an Idempotent Consumer can be created.
+
+🔸 How to implement an Idempotent Consumer
+Each message must have a unique ID.
+When a consumer receives a message:
+First, it checks whether this ID has been processed before.
+If this ID has been processed before, it ignores it.
+Otherwise, the message is processed and its ID is stored in the list of processed messages.
+🔹 This list can be:
+
+A table in a database.
+
+Stored in memory (like Redis) that keeps the IDs for a limited time (say 30 minutes).
+✅ This method ensures that even if RabbitMQ resends some messages, the consumer ignores duplicate messages.

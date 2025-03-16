@@ -28,6 +28,7 @@ public class RabbitmqStreamConfig {
     private static final String CONSUMER_OFFSET_TIMESTAMP_02  = "consumer-offset-timestamp-02";
 
     private static final String CONSUMER_OFFSET_FIRST_03  = "consumer-offset-first-03";
+    private static final String CONSUMER_SINGLE_ACTIVE_01  = "consumer-single-active-01";
 
     @Bean
     public RabbitListenerContainerFactory<StreamListenerContainer> absoluteContainerFactoryOne(Environment environment){
@@ -126,6 +127,15 @@ public class RabbitmqStreamConfig {
         StreamRabbitListenerContainerFactory factory = new StreamRabbitListenerContainerFactory(environment);
         factory.setNativeListener(true);
         factory.setConsumerCustomizer((id, builder) -> builder.name(CONSUMER_OFFSET_FIRST_03).offset(OffsetSpecification.first()).manualTrackingStrategy());
+        return factory;
+    }
+
+    @Bean
+    public RabbitListenerContainerFactory<StreamListenerContainer> singleActiveContainerFactory(Environment environment){
+        StreamRabbitListenerContainerFactory factory = new StreamRabbitListenerContainerFactory(environment);
+        factory.setNativeListener(true);
+        factory.setConsumerCustomizer((id, builder) -> builder.name(CONSUMER_SINGLE_ACTIVE_01).offset(OffsetSpecification.next())
+                .singleActiveConsumer().autoTrackingStrategy());
         return factory;
     }
 

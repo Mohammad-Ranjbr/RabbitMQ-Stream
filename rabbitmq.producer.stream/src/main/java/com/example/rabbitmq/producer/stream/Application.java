@@ -18,7 +18,7 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		streamNumberProducer.sendNumber(10, 14);
+		streamNumberProducer.sendNumber(0, 4);
 	}
 
 }

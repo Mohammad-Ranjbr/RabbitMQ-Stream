@@ -13,9 +13,14 @@ public class NumberConsumerTimestamp {
 
     private static final Logger logger = LoggerFactory.getLogger(NumberConsumerTimestamp.class);
 
-    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "timestampContainerFactoryOne")
-    public void absoluteOne(Message message, MessageHandler.Context context) {
-        logger.info("Timestamp One: {}, on offset {}", message, context.offset());
+//    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "timestampContainerFactoryOne")
+//    public void absoluteOne(Message message, MessageHandler.Context context) {
+//        logger.info("Timestamp One: {}, on offset {}", message, context.offset());
+//    }
+
+    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "timestampContainerFactoryTwo")
+    public void absoluteTwo(Message message, MessageHandler.Context context) {
+        logger.info("Timestamp 2: {}, on offset {}", message, context.offset());
     }
 
 }

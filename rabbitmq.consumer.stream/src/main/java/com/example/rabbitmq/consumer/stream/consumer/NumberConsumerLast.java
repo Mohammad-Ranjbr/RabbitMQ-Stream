@@ -13,9 +13,14 @@ public class NumberConsumerLast {
 
     private static final Logger logger = LoggerFactory.getLogger(NumberConsumerLast.class);
 
-    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "lastContainerFactoryOne")
-    public void absoluteOne(Message message, MessageHandler.Context context) {
-        logger.info("Last One: {}, on offset {}", message, context.offset());
+//    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "lastContainerFactoryOne")
+//    public void absoluteOne(Message message, MessageHandler.Context context) {
+//        logger.info("Last One: {}, on offset {}", message, context.offset());
+//    }
+
+    @RabbitListener(queues = RabbitmqStreamConfig.STREAM_NAME, containerFactory = "nextContainerFactoryTwo")
+    public void absoluteTwo(Message message, MessageHandler.Context context) {
+        logger.info("Last 2: {}, on offset {}", message, context.offset());
     }
 
 }

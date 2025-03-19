@@ -1,6 +1,7 @@
 package com.example.rabbitmq.producer.stream;
 
 import com.example.rabbitmq.producer.stream.producer.StreamNumberProducer;
+import com.example.rabbitmq.producer.stream.producer.SuperStreamNumberProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,10 +16,13 @@ public class Application implements CommandLineRunner {
 	}
 
 	private final StreamNumberProducer streamNumberProducer;
+	private final SuperStreamNumberProducer superStreamNumberProducer;
 
 	@Override
 	public void run(String... args) {
-		streamNumberProducer.sendNumber(0, 10_000);
+		//streamNumberProducer.sendNumber(0, 10_000);
+		superStreamNumberProducer.sendNumberUsingRabbitTemplate(0, 10);
+		superStreamNumberProducer.sndNumberUsingRabbitStreamTemplate(10, 20);
 	}
 
 }

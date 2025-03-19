@@ -123,3 +123,35 @@ A table in a database.
 
 Stored in memory (like Redis) that keeps the IDs for a limited time (say 30 minutes).
 ✅ This method ensures that even if RabbitMQ resends some messages, the consumer ignores duplicate messages.
+
+🔎 Superstream Concept in RabbitMQ
+To avoid duplicate processing of messages in RabbitMQ Stream, there is usually only one active Consumer per stream. But this method makes parallel processing difficult.
+
+🚀 Solution: Superstream is a logical concept that includes:
+✅ An Exchange (to distribute messages)
+✅ Multiple Streams (to partition data)
+From the perspective of an application, these multiple streams are considered as a single stream.
+
+🧩 Superstream Structure
+In Superstream, each actual stream acts as a partition.
+In this way:
+Data is distributed evenly across different partitions.
+Each partition has only one active Consumer to avoid duplicate processing.
+This architecture allows for the creation of concurrent Listeners.
+
+👨‍💻 Consumer Behavior
+Each partition has only one active Consumer.
+If multiple instances of a Consumer are running, only one of them is connected to the partition.
+If one of these instances is disabled, another instance takes over the responsibility of that partition.
+
+🔄 How to distribute messages across partitions
+RabbitMQ uses a Routing Key to distribute messages across different partitions. Two common ways to set this key are:
+
+Manually calculating the Routing Key:
+For example (message_number % partition_number)
+In this method, you have to manually calculate which partition the message should go to.
+Using the Message ID:
+In this method, RabbitMQ automatically uses the Message ID and sends it to the appropriate partition.
+The advantage of this method is that you don't need to do any manual calculations.
+
+

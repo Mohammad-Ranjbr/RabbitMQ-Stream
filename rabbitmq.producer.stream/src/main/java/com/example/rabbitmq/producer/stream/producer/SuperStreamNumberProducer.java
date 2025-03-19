@@ -1,6 +1,7 @@
 package com.example.rabbitmq.producer.stream.producer;
 
 import com.example.rabbitmq.producer.stream.config.RabbitmqSuperStreamConfig;
+import com.rabbitmq.stream.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +36,7 @@ public class SuperStreamNumberProducer {
             // RabbitMQ automatically hashes the messageId and decides which partition the message should be placed in based on that.
             // Messages with the same messageId are always placed in the same partition and their order is preserved.
             // You can not specify the messageId and in this case RabbitMQ will automatically generate a random ID for the message.
-            var message = rabbitStreamTemplate.messageBuilder().addData(str.getBytes()).properties().messageId(i).messageBuilder().build();
+            Message message = rabbitStreamTemplate.messageBuilder().addData(str.getBytes()).properties().messageId(i).messageBuilder().build();
             rabbitStreamTemplate.send(message);
         }
         System.out.printf("Sent super stream %d to%d", start, (end-1));

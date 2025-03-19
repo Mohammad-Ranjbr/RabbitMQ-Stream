@@ -154,4 +154,10 @@ Using the Message ID:
 In this method, RabbitMQ automatically uses the Message ID and sends it to the appropriate partition.
 The advantage of this method is that you don't need to do any manual calculations.
 
+❌ You cannot use @RapidListener to create a Consumer
+Under normal circumstances, you can create a simple consumer using this annotation.
+But for Superstream, this method does not work and you need to do it in a different way.
 
+🟠 Set maxConsumersByConnection to 1
+When you have multiple partitions in Superstream and you want to have only one active consumer per partition, you need to set the following property.
+This ensures that there is only one active consumer per partition.

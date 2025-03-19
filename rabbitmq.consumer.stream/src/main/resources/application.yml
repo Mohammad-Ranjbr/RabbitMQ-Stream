@@ -4,3 +4,5 @@ spring:
     addresses: localhost:5672
     username: admin
     password: admin123
+
+

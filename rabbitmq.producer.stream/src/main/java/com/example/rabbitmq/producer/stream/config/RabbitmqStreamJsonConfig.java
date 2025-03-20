@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.rabbitmq.stream.Environment;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.rabbit.stream.producer.RabbitStreamTemplate;
@@ -29,7 +28,7 @@ public class RabbitmqStreamJsonConfig {
     }
 
     @Bean
-    public Jackson2JsonMessageConverter getJackson2JsonMessageConverter(@Autowired ObjectMapper objectMapper){
+    public Jackson2JsonMessageConverter getJackson2JsonMessageConverter(ObjectMapper objectMapper){
         return new Jackson2JsonMessageConverter(objectMapper);
     }
 

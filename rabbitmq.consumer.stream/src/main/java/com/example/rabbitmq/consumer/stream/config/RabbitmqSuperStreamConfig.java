@@ -16,7 +16,7 @@ public class RabbitmqSuperStreamConfig {
     private static final Logger logger = LoggerFactory.getLogger(RabbitmqSuperStreamConfig.class);
 
     // It is responsible for managing the connection to RabbitMQ and reading messages from Superstream.
-    @Bean
+    //@Bean
     public StreamListenerContainer superStreamNumberContainer(){
         Environment environment = Environment.builder().maxConsumersByConnection(1)
                 .username("admin")

@@ -23,7 +23,7 @@ public class InvoiceConsumer {
 
     @RabbitListener(queues = RabbitmqStreamJsonConfig.STREAM_INVOICE)
     public void listenDefault(Invoice message){
-        logger.info("Listen Default : " + message);
+        logger.info("Listen Default : {}", message);
     }
 
     @RabbitListener(queues =  RabbitmqStreamJsonConfig.STREAM_INVOICE, containerFactory = "invoiceContainerFactoryOne")

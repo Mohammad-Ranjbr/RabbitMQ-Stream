@@ -43,6 +43,8 @@ public class Application implements CommandLineRunner {
 //			}
 //		}
 
+		// In RabbitMQ, when we use SuperStream, partitions are not created automatically by default.
+		// This only happens when a Non-Stream Component (e.g. RabbitTemplate) is active in the project and a message is sent through it.
 		rabbitTemplate.convertAndSend("Test");
 		for(int i=0; i<10; i++){
 			var invoiceAmount = ThreadLocalRandom.current().nextInt(100, 1000);

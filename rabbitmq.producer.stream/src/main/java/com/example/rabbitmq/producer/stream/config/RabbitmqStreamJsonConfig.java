@@ -14,7 +14,7 @@ public class RabbitmqStreamJsonConfig {
 
     public static final String STREAM_INVOICE_NAME = "s.invoice";
 
-    @Bean
+    //@Bean
     public Declarables rabbitmqScheme(){
         FanoutExchange exchange = ExchangeBuilder.fanoutExchange("x.invoice").durable(true).build();
         Queue queue = QueueBuilder.durable(STREAM_INVOICE_NAME).stream().build();
